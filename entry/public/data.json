@@ -1,0 +1,47 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "ecommerces",
+      "thumbnail": "/assets/preview/ecommerce/bugmart.jpeg"
+    },
+    {
+      "id": 2,
+      "name": "entertainments",
+      "thumbnail": "/assets/preview/ecommerce/bugmart.jpeg"
+    },
+    {
+      "id": 3,
+      "name": "newsandmedias",
+      "thumbnail": "/assets/preview/ecommerce/bugmart.jpeg"
+    },
+    {
+      "id": 4,
+      "name": "socialmedias",
+      "thumbnail": "/assets/preview/ecommerce/bugmart.jpeg"
+    },
+    {
+      "id": 5,
+      "name": "educationals",
+      "thumbnail": "/assets/preview/ecommerce/bugmart.jpeg"
+    },
+    {
+      "id": 6,
+      "name": "blogs",
+      "thumbnail": "/assets/preview/ecommerce/bugmart.jpeg"
+    },
+    {
+      "id": 7,
+      "name": "forums",
+      "thumbnail": "/assets/preview/ecommerce/bugmart.jpeg"
+    }
+  ],
+  "templates": [
+    {
+      "name": "bugmart",
+      "category": 1,
+      "thumbnail": "/assets/preview/ecommerce/bugmart.jpeg",
+      "page": "/ecommerce/bugmart"
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 
 <template>
   <div>
-    <h1>Isabelle Hayes</h1>
+    <h1>I'm Isabelle Hayes</h1>
     <h4>
       In my free time, I love tinkering with personal coding projects, like this
       portfolio app I built, and I'm always diving into new frameworks –
@@ -26,9 +26,11 @@ div {
 
 h1 {
   color: white;
+  font-size: 4rem;
 }
 
 h4 {
-  margin: 18px 0 0 0;
+  margin: 28px 0 0 0;
+  font-size: 1.3rem;
 }
 </style>

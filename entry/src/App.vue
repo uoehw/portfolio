@@ -1,32 +1,47 @@
 <script setup>
+import { onMounted, ref, watch } from "vue";
 import PersonalInfo from "./components/PersonalInfo.vue";
 import PinterestLayout from "./components/PinterestLayout.vue";
+import FilterSelection from "./components/FilterSelection.vue";
+import { performFilter, filters } from "./filter";
 
-const randomHeight = (max, min) => {
-  const g = parseInt(max * Math.random());
-  return (min ?? 100) + g + "px";
+const selected = ref("All");
+const data = ref({});
+
+const fetchData = async () => {
+  try {
+    const response = await fetch("/data.json");
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const jsonData = await response.json();
+    data.value.orginal = jsonData;
+    data.value.filtered = performFilter(jsonData, selected.value);
+  } catch {
+    // Clear data on error
+    data.value.orginal = {};
+    data.value.filtered = [];
+  }
 };
 
-const templates = Array(14)
-  .fill({})
-  .map((v, i) => {
-    return {
-      id: i + 1,
-      text: i + 1 + "",
-      height: randomHeight(120, 190),
-    };
+onMounted(() => {
+  fetchData();
+  watch(selected, () => {
+    data.value.filtered = performFilter(data.value.orginal, selected.value);
   });
+});
 </script>
 
 <template>
   <header>
     <div class="wrapper">
       <PersonalInfo />
+      <FilterSelection :sorts="filters" v-model="selected" />
     </div>
   </header>
 
   <main>
-    <PinterestLayout :data="templates" :gap="32" :column="2" :round="8">
+    <PinterestLayout :data="data.filtered" :gap="32" :column="2" :round="8">
       <template v-slot="slotProp">
         <div
           style="background: coral"

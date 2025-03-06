@@ -70,7 +70,49 @@ const throttling = ((fn) => {
   };
 })(onResize);
 
+const handleWheel = (event) => {
+  if (
+    container.value &&
+    container.value.scrollHeight > container.value.clientHeight
+  ) {
+    event.preventDefault(); // Prevent default scroll
+
+    const sensitivity = 2.2; // Adjust sensitivity
+    let targetScroll = container.value.scrollTop + event.deltaY * sensitivity;
+
+    // Boundary check
+    targetScroll = Math.max(
+      0,
+      Math.min(
+        targetScroll,
+        container.value.scrollHeight - container.value.clientHeight,
+      ),
+    );
+
+    let currentScroll = container.value.scrollTop;
+    let startTime = null;
+    const duration = 160; // Animation duration in milliseconds
+
+    const animateScroll = (timestamp) => {
+      if (!startTime) startTime = timestamp;
+      const progress = timestamp - startTime;
+
+      if (progress < duration) {
+        const ease = progress / duration; // Linear easing
+        container.value.scrollTop =
+          currentScroll + (targetScroll - currentScroll) * ease;
+        requestAnimationFrame(animateScroll);
+      } else {
+        container.value.scrollTop = targetScroll; // Ensure final position
+      }
+    };
+
+    requestAnimationFrame(animateScroll);
+  }
+};
+
 onMounted(() => {
+  document.body.addEventListener("wheel", handleWheel, { passive: false });
   resizeObserver = new ResizeObserver(throttling);
   if (container.value) {
     resizeObserver.observe(container.value);
@@ -78,6 +120,7 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
+  document.body.removeEventListener("wheel", handleWheel);
   resizeObserver?.disconnect(); // Important: Clean up the observer
 });
 </script>

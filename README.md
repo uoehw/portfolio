@@ -15,7 +15,9 @@ Create a portfolio website using Github static hosting.
    `git submodule add https://github.com/uoehw/uoehw.github.io.git`. Make sure to change the
    url according your own repository.
 
-![overview](assets/diagram.jpeg "Overview Process")
+Overall process to host a static portfolio using Github Page.
+
+![overview](/assets/diagram.jpg "Overview Process")
 
 ## Create an Entry Page
 
@@ -82,6 +84,18 @@ We start with a simple blogs. Make sure your working directory is in `portfolio`
 
 ## Build and Release Welcome Page
 
+Note: in this example we use organization name `uoehw`. Make sure to change it to
+your organization or your github personal account.
+
 1. Build entry with the following command `(cd entry/ && npm run build)`
 
 2. Copy dist file to `uoehw.github.io` with the following command `cp -r entry/dist/* uoehw.github.io/`
+
+3. Commit change to `uoehw.github.io` with following command `(cd uoehw.github.io/ && git add . && git commit -m 'pharse1 release')`
+
+4. Push the change to `uoehw.github.io` with following command `(cd uoehw.github.io/ && git push origin main)`
+
+5. Access `uoehw.github.io` via the browser
+
+Now the release code should be published into repository `uoehw.github.io`. Also you can add and coommit change to `portfolio`
+repository as well.
